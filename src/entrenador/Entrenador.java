@@ -4,21 +4,23 @@ import pokemon.Pokemon;
 import java.util.ArrayList;
 import java.util.Random;
 
-
 public class Entrenador implements IEntrenable {
     private String nombre;
     private ArrayList<Pokemon> equipo;
-    private ArrayList<Pokemon> pokedex;
+    private ArrayList<Pokemon> cajaPokemon;
     private int pokedollar;
-    private Objeto objeto;
+    private Pokeball objeto;
     private int numPokemon;
 
-    Entrenador(String nombre) {
+    Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,Pokeball objeto, int numPokemon) {
         Random rnd = new Random();
         this.nombre = nombre;
         this.pokedollar = rnd.nextInt(800 - 1000);
         this.equipo = equipo;
+        this.cajaPokemon = cajaPokemon;
+        this.numPokemon = numPokemon;
         this.objeto = objeto;
+        
 
     }
 
@@ -34,16 +36,21 @@ public class Entrenador implements IEntrenable {
         return numPokemon;
     }
 
-    public Objeto getObjeto() {
-        return objeto;
-    }
 
     public int getPokedollar() {
         return pokedollar;
     }
 
-    public ArrayList<Pokemon> getPokedex() {
-        return pokedex;
+    public ArrayList<Pokemon> cajaPokemon() {
+        return cajaPokemon;
+    }
+
+    public Pokeball getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(Pokeball objeto) {
+        this.objeto = objeto;
     }
 
     public void setEquipo(ArrayList<Pokemon> equipo) {
@@ -58,16 +65,13 @@ public class Entrenador implements IEntrenable {
         this.numPokemon = numPokemon;
     }
 
-    public void setObjeto(Objeto objeto) {
-        this.objeto = objeto;
-    }
 
     public void setPokedollar(int pokedollar) {
         this.pokedollar = pokedollar;
     }
 
-    public void setPokedex(ArrayList<Pokemon> pokedex) {
-        this.pokedex = pokedex;
+    public void setcajaPokemon(ArrayList<Pokemon> cajaPokemon) {
+        this.cajaPokemon = cajaPokemon;
     }
 
     @Override
@@ -81,7 +85,7 @@ public class Entrenador implements IEntrenable {
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
             if (pokemon.defensa + 5 >= 100)
-                defensa = 100;
+                pokemon.defensa = 100;
             else
                 pokemon.defensa += 5;
 
@@ -107,17 +111,17 @@ public class Entrenador implements IEntrenable {
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
             if (pokemon.ataque + 5 >= 100)
-                ataque = 100;
+                pokemon.ataque = 100;
             else
                 pokemon.ataque += 5;
 
             if (pokemon.ataqueEspecial + 5 >= 100)
-                ataqueEspecial = 100;
+                pokemon.ataqueEspecial = 100;
             else
                 pokemon.ataqueEspecial += 5;
 
             if (pokemon.velocidad + 5 >= 100)
-                velocidad = 100;
+                pokemon.velocidad = 100;
             else
                 pokemon.velocidad += 5;
 
@@ -134,22 +138,22 @@ public class Entrenador implements IEntrenable {
             pokedollar = pokedollar - comprobador;
 
             if (pokemon.ataque + 5 >= 100)
-                ataque = 100;
+                pokemon.ataque = 100;
             else
                 pokemon.ataque += 5;
 
             if (pokemon.defensa + 5 >= 100)
-                defensa = 100;
+                pokemon.defensa = 100;
             else
                 pokemon.defensa += 5;
 
             if (pokemon.velocidad + 5 >= 100)
-                velocidad = 100;
+                pokemon.velocidad = 100;
             else
                 pokemon.velocidad += 5;
 
             if (pokemon.vitalidad + 5 >= 100)
-                vitalidad = 100;
+                pokemon.vitalidad = 100;
             else
                 pokemon.vitalidad += 5;
         }
@@ -162,22 +166,22 @@ public class Entrenador implements IEntrenable {
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
             if (pokemon.ataqueEspecial + 5 >= 100)
-                ataqueEspecial = 100;
+                pokemon.ataqueEspecial = 100;
             else
                 pokemon.ataqueEspecial += 5;
 
             if (pokemon.defensaEspecial + 5 >= 100)
-                defensaEspecial = 100;
+                pokemon.defensaEspecial = 100;
             else
                 pokemon.defensaEspecial += 5;
 
             if (pokemon.velocidad + 5 >= 100)
-                velocidad = 100;
+                pokemon.velocidad = 100;
             else
                 pokemon.velocidad += 5;
 
             if (pokemon.vitalidad + 5 >= 100)
-                vitalidad = 100;
+                pokemon.vitalidad = 100;
             else
                 pokemon.vitalidad += 5;
         } else {
@@ -186,21 +190,22 @@ public class Entrenador implements IEntrenable {
 
     }
 
-    public void guardarPokemon() {
+    public void guardarPokemon(Pokemon pokemon) {
         if (equipo.size() > 1) {
-
+            cajaPokemon.add(pokemon);
         } else {
             System.out.println("Tú equipo debe tener mínimo 1 Pokemons");
         }
     }
 
-    public void sacarPokemon() {
+    public void sacarPokemon(Pokemon pokemon) {
         if (equipo.size() < 4) {
-
+            equipo.add(pokemon);
         } else {
             System.out.println("Tú equipo no puede tener más de 4 Pokemons");
         }
     }
+
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
         int ataqueCria;
@@ -224,53 +229,53 @@ public class Entrenador implements IEntrenable {
                         String nombreCria = pokemon2.nombre.size / 2 + pokemon1.nombre.size / 2;
                     }
                     
-                    if(pokemon1.ataqueCria > pokemon2.ataqueCria){
+                    if(pokemon1.ataque > pokemon2.ataque){
                         
-                        ataqueCria = pokemon1.ataqueCria;
+                        ataqueCria = pokemon1.ataque;
                     }else {
-                        ataqueCria = pokemon2.ataqueCria;
+                        ataqueCria = pokemon2.ataque;
                     }
                 
-                    if(pokemon1.ataqueEspecialCria > pokemon2.ataqueEspecialCria){
+                    if(pokemon1.ataqueEspecial > pokemon2.ataqueEspecial){
                         
-                        ataqueCria = pokemon1.ataqueEspecialCria;
+                        ataqueEspecialCria = pokemon1.ataqueEspecial;
                     }else {
-                        ataqueEspecialCria = pokemon2.ataqueEspecialCria;
+                        ataqueEspecialCria = pokemon2.ataqueEspecial;
                     }
                     
-                    if(pokemon1.defensaCria > pokemon2.defensaCria){
+                    if(pokemon1.defensa > pokemon2.defensa){
                         
-                        ataqueCria = pokemon1.defensaCria;
+                        defensaCria = pokemon1.defensa;
                     }else {
-                        ataqueCria = pokemon2.defensaCria;
+                        defensaCria = pokemon2.defensa;
                     }
 
-                    if(pokemon1.defensaEspecialCria > pokemon2.defensaEspecialCria){
+                    if(pokemon1.defensaEspecial > pokemon2.defensaEspecial){
                         
-                        ataqueCria = pokemon1.defensaEspecialCria;
+                        defensaEspecialCria = pokemon1.defensaEspecial;
                     }else {
-                        ataqueCria = pokemon2.defensaEspecialCria;
+                        defensaEspecialCria = pokemon2.defensaEspecial;
                     }
 
-                    if(pokemon1.vitalidadCria > pokemon2.vitalidadCria){
+                    if(pokemon1.vitalidad > pokemon2.vitalidad){
                         
-                        ataqueCria = pokemon1.vitalidadCria;
+                        vitalidadCria = pokemon1.vitalidad;
                     }else {
-                        ataqueCria = pokemon2.vitalidadCria;
+                        vitalidadCria = pokemon2.vitalidad;
                     }
 
-                    if(pokemon1.velocidadCria > pokemon2.velocidadCria{
+                    if(pokemon1.velocidad > pokemon2.velocidad{
                         
-                        ataqueCria = pokemon1.velocidadCria;
+                        velocidadCria = pokemon1.velocidad;
                     }else {
-                        ataqueCria = pokemon2.velocidadCria;
+                        velocidadCria = pokemon2.velocidad;
                     }
 
-                    if(pokemon1.estaminaCria > pokemon2.estaminaCria){
+                    if(pokemon1.estamina > pokemon2.estamina){
                         
-                        ataqueCria = pokemon1.estaminaCria;
+                        estaminaCria = pokemon1.estamina;
                     }else {
-                        ataqueCria = pokemon2.estaminaCria;
+                        estaminaCria = pokemon2.estamina;
                     }
                     
                 
@@ -288,4 +293,5 @@ public class Entrenador implements IEntrenable {
         }
 
     }
+
 }
