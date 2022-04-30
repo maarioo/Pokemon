@@ -1,6 +1,1 @@
 # Pokemon
-
-
-## Pokémon class
-
-
