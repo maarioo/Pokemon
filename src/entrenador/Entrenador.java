@@ -7,7 +7,7 @@ import java.util.Random;
 public class Entrenador implements IEntrenable {
     private String nombre;
     private ArrayList<Pokemon> equipo;
-    private ArrayList<Pokemon> cajaPokemon;
+    private ArrayList<Pokemon> pokedex;
     private int pokedollar;
     private Pokeball objeto;
     private int numPokemon;
@@ -17,7 +17,7 @@ public class Entrenador implements IEntrenable {
         this.nombre = nombre;
         this.pokedollar = rnd.nextInt(800 - 1000);
         this.equipo = equipo;
-        this.cajaPokemon = cajaPokemon;
+        this.pokedex = pokedex;
         this.numPokemon = numPokemon;
         this.objeto = objeto;
         
@@ -41,8 +41,8 @@ public class Entrenador implements IEntrenable {
         return pokedollar;
     }
 
-    public ArrayList<Pokemon> cajaPokemon() {
-        return cajaPokemon;
+    public ArrayList<Pokemon> pokedex() {
+        return pokedex;
     }
 
     public Pokeball getObjeto() {
@@ -70,8 +70,8 @@ public class Entrenador implements IEntrenable {
         this.pokedollar = pokedollar;
     }
 
-    public void setcajaPokemon(ArrayList<Pokemon> cajaPokemon) {
-        this.cajaPokemon = cajaPokemon;
+    public void setcajaPokemon(ArrayList<Pokemon> pokedex) {
+        this.pokedex = pokedex;
     }
 
     @Override
@@ -192,7 +192,7 @@ public class Entrenador implements IEntrenable {
 
     public void guardarPokemon(Pokemon pokemon) {
         if (equipo.size() > 1) {
-            cajaPokemon.add(pokemon);
+            pokedex.add(pokemon);
         } else {
             System.out.println("Tú equipo debe tener mínimo 1 Pokemons");
         }
