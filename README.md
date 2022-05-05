@@ -1,6 +1,2 @@
 # Pokemon
-
-
-## Pokémon class
-
-
+# Juan Medrano Costa
