@@ -13,25 +13,27 @@ public class Entrenador implements IEntrenable {
     private Pokeball objeto;
     private int numPokemon;
 
-    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,Pokeball objeto) {
+    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,Pokeball objeto, int numPokemon) {
         Random rnd = new Random();
-        //Pokemon.generarPokemonAleatorio;
         this.nombre = nombre;
         this.pokedollar = rnd.nextInt(800 - 1000);
         this.equipo = equipo;
         this.pokedex = pokedex;
-        this.numPokemon = 0;
+        this.numPokemon = numPokemon;
         this.objeto = objeto;
         
     }
-    //TODO: falta añadirle pokemons al entrenador 
+
     public Entrenador(){
         Random rnd = new Random();
+        int numPoke;
         String[] nombres = {"Fernando","Xin Lu","Yasuo","Super","Pepe", "Luis Manuel", "Paco", "Juaniko", "Ash Ketchup", "Fran", "Pedro", "Jose Carlos", "Angel", "Luis", "Markos"};
-        this.nombre = nombres[rnd.nextInt(15)+1];
+        this.nombre = nombres[rnd.nextInt(15)];
         ArrayList<Pokemon> equipoEntrenador;
-        //equipoEntrenador.add();
-
+        for(int i = 0; i < 4; i++){
+            //equipoEntrenador.add(pokemon.getPokemonAle());
+        }
+        
     }
 
 
@@ -103,7 +105,7 @@ public class Entrenador implements IEntrenable {
                 pokemon.setDefensa(pokemon.getDefensa() + 5);
 
             if (pokemon.getDefensaEspecial() + 5 >= 100)
-                pokemon.setDefensaEspecial(100);
+            pokemon.setDefensaEspecial(100);
             else
                 pokemon.setDefensaEspecial(pokemon.getDefensaEspecial() + 5);
 
@@ -218,8 +220,7 @@ public class Entrenador implements IEntrenable {
             System.out.println("Tú equipo no puede tener más de 4 Pokemons");
         }
     }
-    /*
-    //TODO: MOVIMIENTOS POKEMON CRIA
+    //TODO: MOVIMIENTOS POKEMON CRIA ADEMAS DE HACER BIEN EL NOMBRE
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
         int ataqueCria;
@@ -236,17 +237,13 @@ public class Entrenador implements IEntrenable {
                 if (pokemon1.getFertilidad() > 0 && pokemon2.getFertilidad() > 0) {
                     pokemon1.setFertilidad(pokemon1.getFertilidad() - 1); pokemon2.setFertilidad(pokemon2.getFertilidad() - 1);
                     String nombreCria = new String();
-                    int padre = pokemon1.getMote().length() / 2;
-                    int madre = pokemon2.getMote().length() / 2;
-                    int numero = sc.nextInt(3);
+                    String padre = pokemon1.nombre.size / 2;
+                    String madre = pokemon2.nombre.size / 2;
+                    int numero = sc.nextInt(1 - 2);
                     if (numero == 1) {
-                        for(int i = 0; i < pokemon1.getNombre().length()-1; i++){
-                            nombreCria += 
-                        }
-
-                        pokemon1.nombre.size / 2 + pokemon2.nombre.size / 2;
+                        String nombreCria = pokemon1.nombre.size / 2 + pokemon2.nombre.size / 2;
                     } else {
-                        nombreCria += pokemon2.nombre.size / 2 + pokemon1.nombre.size / 2;
+                        String nombreCria = pokemon2.nombre.size / 2 + pokemon1.nombre.size / 2;
                     }
                     
                     if(pokemon1.getAtaque() > pokemon2.getAtaque()){
@@ -312,6 +309,6 @@ public class Entrenador implements IEntrenable {
             System.out.println("Tus pokemon no son del mismo tipo");
         }
 
-    }*/
+    }
 
 }
