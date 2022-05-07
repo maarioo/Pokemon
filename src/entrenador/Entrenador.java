@@ -5,28 +5,26 @@ import java.util.ArrayList;
 import java.util.Random;
 import pokemon.Pokemon;
 
-public class Entrenador implements IEntrenable {
+
+public class Entrenador implements IEntrenable{
     private String nombre;
     private ArrayList<Pokemon> equipo;
     private ArrayList<Pokemon> pokedex;
     private int pokedollar;
-    private Pokeball objeto;
     private int numPokemon;
 
-    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,Pokeball objeto, int numPokemon) {
+    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,int numPokemon) {
         Random rnd = new Random();
         this.nombre = nombre;
         this.pokedollar = rnd.nextInt(800 - 1000);
         this.equipo = equipo;
         this.pokedex = pokedex;
         this.numPokemon = numPokemon;
-        this.objeto = objeto;
         
     }
 
-    public Entrenador(){
+    public Entrenador(int nivelMedioEquipo){
         Random rnd = new Random();
-        int numPoke;
         String[] nombres = {"Fernando","Xin Lu","Yasuo","Super","Pepe", "Luis Manuel", "Paco", "Juaniko", "Ash Ketchup", "Fran", "Pedro", "Jose Carlos", "Angel", "Luis", "Markos"};
         this.nombre = nombres[rnd.nextInt(15)];
         ArrayList<Pokemon> equipoEntrenador;
@@ -35,10 +33,7 @@ public class Entrenador implements IEntrenable {
         }
         
     }
-
-
-
-
+    
     public ArrayList<Pokemon> getEquipo() {
         return equipo;
     }
@@ -58,14 +53,6 @@ public class Entrenador implements IEntrenable {
 
     public ArrayList<Pokemon> pokedex() {
         return pokedex;
-    }
-
-    public Pokeball getObjeto() {
-        return objeto;
-    }
-
-    public void setObjeto(Pokeball objeto) {
-        this.objeto = objeto;
     }
 
     public void setEquipo(ArrayList<Pokemon> equipo) {
@@ -220,6 +207,7 @@ public class Entrenador implements IEntrenable {
             System.out.println("Tú equipo no puede tener más de 4 Pokemons");
         }
     }
+    /*
     //TODO: MOVIMIENTOS POKEMON CRIA ADEMAS DE HACER BIEN EL NOMBRE
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
@@ -309,6 +297,27 @@ public class Entrenador implements IEntrenable {
             System.out.println("Tus pokemon no son del mismo tipo");
         }
 
+    }*/
+
+    public void generarPokemonAleatorio(int nivelMedioEquipo) {
+        Random rnd = new Random();
+        Pokemon p = new Pokemon();
+        p.setVitalidad(rnd.nextInt(10) + 1);
+        p.setAtaque(rnd.nextInt(5)+1);
+        p.setAtaqueEspecial(rnd.nextInt(5)+1);
+        p.setDefensa(rnd.nextInt(5)+1);
+        p.setDefensaEspecial(rnd.nextInt(5)+1);
+        p.setVelocidad(rnd.nextInt(5)+1);
+        p.setEstamina(rnd.nextInt(10)+1);
+        p.setFertilidad(5);
+        p.setNivel(nivelMedioEquipo + (rnd.nextInt(5) - 2));
+        
+        for(int i = 0; i < nivelMedioEquipo; i++){
+            p.subirNivel();
+        }
+        
+        equipo.add(p);
     }
+
 
 }
