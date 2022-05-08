@@ -1,9 +1,10 @@
 package pokemon;
 
+import java.util.Random;
+
 public class Pokemon implements IMecanicaCaptura{
     private String nombre;
     private String mote;
-    private String sexo;
     private int vitalidad;
     private int ataque;
     private int defensa;
@@ -15,10 +16,11 @@ public class Pokemon implements IMecanicaCaptura{
     private int fertilidad;
     private EnumTipo tipo;
     private EnumEstado estado;
+    private int xpActual;
 
 
     public Pokemon(String nombre, String mote, int vitalidad, int ataque, int defensa,int ataqueEspecial, int defensaEspecial, int velocidad, int estamina, int nivel,
-    EnumTipo tipo, EnumEstado estado){
+    EnumTipo tipo, EnumEstado estado, int xpActual){
         this.nombre = nombre;
         this.mote = mote;
         this.vitalidad = vitalidad;
@@ -32,6 +34,10 @@ public class Pokemon implements IMecanicaCaptura{
         this.fertilidad = 5;
         this.tipo = tipo;
         this.estado = estado;
+        this.xpActual = xpActual;
+    }
+    
+    public Pokemon() {
     }
 
     public String getNombre() {
@@ -39,9 +45,6 @@ public class Pokemon implements IMecanicaCaptura{
     }
     public String getMote() {
         return mote;
-    }
-    public String getSexo() {
-        return sexo;
     }
     public int getVitalidad() {
         return vitalidad;
@@ -82,9 +85,6 @@ public class Pokemon implements IMecanicaCaptura{
     public void setMote(String mote) {
         this.mote = mote;
     }
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
     public void setVitalidad(int vitalidad) {
         this.vitalidad = vitalidad;
     }
@@ -107,7 +107,6 @@ public class Pokemon implements IMecanicaCaptura{
         this.estamina = estamina;
     }
     public void setNivel(int nivel) {
-
         this.nivel = nivel;
     }
     public void setFertilidad(int fertilidad) {
@@ -119,15 +118,45 @@ public class Pokemon implements IMecanicaCaptura{
     public void setEstado(EnumEstado estado) {
         this.estado = estado;
     }
+    public int subirNivel(){
+        Random r = new Random();
+            if(xpActual > 10 * nivel) {
+                this.nivel++;
+                vitalidad = vitalidad + r.nextInt(5) + 1;
+                ataque = ataque + r.nextInt(5) + 1;
+                defensa = defensa + r.nextInt(5) + 1;
+                ataqueEspecial = ataqueEspecial + r.nextInt(5) + 1;
+                defensaEspecial = defensaEspecial + r.nextInt(5) + 1;
+                velocidad = velocidad + r.nextInt(5) + 1;
+            }
+        return nivel;
+    }
 
     @Override
     public void generarPokemon() {
-        // TODO Auto-generated method stub
-        
-    }
+        Random rnd = new Random();
+        Pokemon p = new Pokemon();
+        p.setVitalidad(rnd.nextInt(10) + 1);
+        p.setAtaque(rnd.nextInt(5)+1);
+        p.setAtaqueEspecial(rnd.nextInt(5)+1);
+        p.setDefensa(rnd.nextInt(5)+1);
+        p.setDefensaEspecial(rnd.nextInt(5)+1);
+        p.setVelocidad(rnd.nextInt(5)+1);
+        p.setEstamina(rnd.nextInt(10)+1);
+        p.setFertilidad(5);
+        p.setNivel(1);
+        //equipo.add(p);
+        }
+
     @Override
-    public void capturarPokemon() {
-        // TODO Auto-generated method stub
-        
+    public boolean capturarPokemon() {
+        Random r = new Random();
+        int nAleatorio = r.nextInt(4);
+        if (nAleatorio == 3){
+            return false;
+        }else{
+            generarPokemon();
+            return true;
+        }
     }
 }

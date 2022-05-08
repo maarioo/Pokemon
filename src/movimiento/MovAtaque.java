@@ -24,4 +24,5 @@ public class MovAtaque {
     public void setTipoMov(EnumTipo tipoMov) {
         this.tipoMov = tipoMov;
     }
+    
 }
