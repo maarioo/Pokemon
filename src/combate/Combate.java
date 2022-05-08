@@ -63,7 +63,7 @@ public class Combate {
         if (pokemonJugador.size() >= 4) {
             if (pokemonJugador.get(0).getVelocidad() >= pokemonRival.get(0).getVelocidad()) {
                 while(koEntrenador < 4 && koRival < 4){
-                    
+                    turno++;
                 }
             }
         }
