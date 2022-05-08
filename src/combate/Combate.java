@@ -60,7 +60,7 @@ public class Combate {
         ArrayList<Pokemon> pokemonJugador = this.entrenadorJugador.getEquipo();
         ArrayList<Pokemon> pokemonRival = this.entrenadorRival.getEquipo();
         
-        if (pokemonJugador.size() >= 4) {
+       if (pokemonJugador.size() >= 4) {
             if (pokemonJugador.get(0).getVelocidad() >= pokemonRival.get(0).getVelocidad()) {
                 while(koEntrenador < 4 && koRival < 4){
                     turno++;
@@ -71,6 +71,22 @@ public class Combate {
     }
 
     public void rendirse() {
+        koRival = 4;
+    }
 
+    public boolean ganarPokedollares(){
+        int pokedollaresG = 0;
+        if(koRival == 4){
+            pokedollaresG += entrenadorJugador.getPokedollar() + (entrenadorJugador.getPokedollar()* 0.33);
+            return true;
+        }else return false;
+    }
+
+    public boolean perderPokedollares(){
+        int pokedollaresP = 0;
+        if(koEntrenador == 4){
+            pokedollaresP += entrenadorJugador.getPokedollar() - (entrenadorJugador.getPokedollar()* 0.33);
+            return true;
+        }else return false;
     }
 }
