@@ -3,23 +3,23 @@ package entrenador;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+
 import pokemon.Pokemon;
 
 
 public class Entrenador implements IEntrenable{
     private String nombre;
     private ArrayList<Pokemon> equipo;
-    private ArrayList<Pokemon> pokedex;
+    private ArrayList<Pokemon> caja; //
     private int pokedollar;
-    private int numPokemon;
 
-    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,int numPokemon) {
+    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> caja) {
         Random rnd = new Random();
         this.nombre = nombre;
-        this.pokedollar = rnd.nextInt(800 - 1000);
+        this.pokedollar = rnd.nextInt(200)+800;
         this.equipo = equipo;
-        this.pokedex = pokedex;
-        this.numPokemon = numPokemon;
+        this.caja = caja;
         
     }
 
@@ -27,7 +27,7 @@ public class Entrenador implements IEntrenable{
         Random rnd = new Random();
         String[] nombres = {"Fernando","Xin Lu","Yasuo","Super","Pepe", "Luis Manuel", "Paco", "Juaniko", "Ash Ketchup", "Fran", "Pedro", "Jose Carlos", "Angel", "Luis", "Markos"};
         this.nombre = nombres[rnd.nextInt(15)];
-        ArrayList<Pokemon> equipoEntrenador;
+        ArrayList<Pokemon> equipoEntrenador = new ArrayList<>();
         for(int i = 0; i < 4; i++){
             //equipoEntrenador.add(pokemon.getPokemonAle());
         }
@@ -42,17 +42,13 @@ public class Entrenador implements IEntrenable{
         return nombre;
     }
 
-    public int getNumPokemon() {
-        return numPokemon;
-    }
-
 
     public int getPokedollar() {
         return pokedollar;
     }
 
-    public ArrayList<Pokemon> pokedex() {
-        return pokedex;
+    public ArrayList<Pokemon> caja() {
+        return caja;
     }
 
     public void setEquipo(ArrayList<Pokemon> equipo) {
@@ -63,17 +59,12 @@ public class Entrenador implements IEntrenable{
         this.nombre = nombre;
     }
 
-    public void setNumPokemon(int numPokemon) {
-        this.numPokemon = numPokemon;
-    }
-
-
     public void setPokedollar(int pokedollar) {
         this.pokedollar = pokedollar;
     }
 
-    public void setcajaPokemon(ArrayList<Pokemon> pokedex) {
-        this.pokedex = pokedex;
+    public void setcajaPokemon(ArrayList<Pokemon> caja) {
+        this.caja = caja;
     }
 
     @Override
@@ -82,7 +73,7 @@ public class Entrenador implements IEntrenable{
     }
 
     @Override
-    public void entrenamientoPesado(Pokemon pokemon) {
+    public boolean entrenamientoPesado(Pokemon pokemon) {
         int comprobador = pokedollar - (20 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
@@ -100,15 +91,15 @@ public class Entrenador implements IEntrenable{
                 pokemon.setVitalidad(100);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
+                return true;
+        } else return false;
+    } 
+    
 
-        } else {
-            System.out.println("No tienes suficientes pokedollares");
-        }
-
-    }
+    
 
     @Override
-    public void entrenamientoFurioso(Pokemon pokemon) {
+    public boolean entrenamientoFurioso(Pokemon pokemon) {
         int comprobador = pokedollar - (30 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
@@ -126,15 +117,16 @@ public class Entrenador implements IEntrenable{
                 pokemon.setVelocidad(100);
             else
                 pokemon.setVelocidad(pokemon.getVelocidad() + 5);
-
+                return true;
         } else {
-            System.out.println("No tienes suficientes pokedollares");
+            return false;
         }
+    
 
     }
 
     @Override
-    public void entrenamientoFuncional(Pokemon pokemon) {
+    public boolean entrenamientoFuncional(Pokemon pokemon) {
         int comprobador = pokedollar - (40 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
@@ -158,12 +150,14 @@ public class Entrenador implements IEntrenable{
                 pokemon.setVitalidad(100);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
-        }
-        System.out.println("No tienes sufucientes pokedollares");
+                return true;
+        }else return false;
+    
+        
     }
 
-    @Override
-    public void entrenamientoOnirico(Pokemon pokemon) {
+    @Override 
+    public boolean entrenamientoOnirico(Pokemon pokemon) {
         int comprobador = pokedollar - (40 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
@@ -186,26 +180,26 @@ public class Entrenador implements IEntrenable{
                 pokemon.setVitalidad(100);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
-        } else {
-            System.out.println("No tienes suficientes pokedollares");
+                return true;
+        } else return false;
         }
-
-    }
-
-    public void guardarPokemon(Pokemon pokemon) {
+    
+    public boolean guardarPokemon(Pokemon pokemon) {
         if (equipo.size() > 1) {
-            pokedex.add(pokemon);
-        } else {
-            System.out.println("Tú equipo debe tener mínimo 1 Pokemons");
-        }
+            caja.add(pokemon);
+            equipo.remove(pokemon);
+            return true;
+        } else 
+            return false;
     }
 
-    public void sacarPokemon(Pokemon pokemon) {
+    public boolean sacarPokemon(Pokemon pokemon) {
         if (equipo.size() < 4) {
             equipo.add(pokemon);
-        } else {
-            System.out.println("Tú equipo no puede tener más de 4 Pokemons");
-        }
+            caja.remove(pokemon);
+            return true;
+        } else 
+            return false;
     }
     /*
     //TODO: MOVIMIENTOS POKEMON CRIA ADEMAS DE HACER BIEN EL NOMBRE
@@ -302,6 +296,7 @@ public class Entrenador implements IEntrenable{
     public void generarPokemonAleatorio(int nivelMedioEquipo) {
         Random rnd = new Random();
         Pokemon p = new Pokemon();
+        int nivelFinal = nivelMedioEquipo + (rnd.nextInt(5) - 2);
         p.setVitalidad(rnd.nextInt(10) + 1);
         p.setAtaque(rnd.nextInt(5)+1);
         p.setAtaqueEspecial(rnd.nextInt(5)+1);
@@ -310,9 +305,8 @@ public class Entrenador implements IEntrenable{
         p.setVelocidad(rnd.nextInt(5)+1);
         p.setEstamina(rnd.nextInt(10)+1);
         p.setFertilidad(5);
-        p.setNivel(nivelMedioEquipo + (rnd.nextInt(5) - 2));
         
-        for(int i = 0; i < nivelMedioEquipo; i++){
+        for(int i = 1; i < nivelFinal; i++){
             p.subirNivel();
         }
         

@@ -7,4 +7,5 @@ public interface IEntrenable {
     public boolean entrenamientoFurioso(Pokemon pokemon);
     public boolean entrenamientoFuncional(Pokemon pokemon);
     public boolean entrenamientoOnirico(Pokemon pokemon);
+
 }
