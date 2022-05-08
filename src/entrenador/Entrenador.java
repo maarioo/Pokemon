@@ -8,7 +8,7 @@ import java.util.Random;
 import pokemon.Pokemon;
 
 
-public class Entrenador implements IEntrenable{
+public class Entrenador implements IEntrenable {
     private String nombre;
     private ArrayList<Pokemon> equipo = new ArrayList<>();
     ArrayList<Pokemon> equipoEntrenador = new ArrayList<>();
@@ -203,7 +203,7 @@ public class Entrenador implements IEntrenable{
             return false;
     }
     
-    //TODO: MOVIMIENTOS POKEMON CRIA ADEMAS DE HACER BIEN EL NOMBRE
+    //TODO: MOVIMIENTOS POKEMON CRIA
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
         int ataqueCria;
