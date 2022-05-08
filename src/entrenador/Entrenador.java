@@ -10,8 +10,9 @@ import pokemon.Pokemon;
 
 public class Entrenador implements IEntrenable{
     private String nombre;
-    private ArrayList<Pokemon> equipo;
-    private ArrayList<Pokemon> caja; //
+    private ArrayList<Pokemon> equipo = new ArrayList<>();
+    ArrayList<Pokemon> equipoEntrenador = new ArrayList<>();
+    private ArrayList<Pokemon> caja;
     private int pokedollar;
 
     public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> caja) {
@@ -201,7 +202,7 @@ public class Entrenador implements IEntrenable{
         } else 
             return false;
     }
-    /*
+    
     //TODO: MOVIMIENTOS POKEMON CRIA ADEMAS DE HACER BIEN EL NOMBRE
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
@@ -213,19 +214,26 @@ public class Entrenador implements IEntrenable{
         int velocidadCria;
         int estaminaCria;
 
-        if(pokemon1.getNombre().equals(pokemon2.getNombre())){
-            if (pokemon1.getSexo() != pokemon2.getSexo()){
-
                 if (pokemon1.getFertilidad() > 0 && pokemon2.getFertilidad() > 0) {
                     pokemon1.setFertilidad(pokemon1.getFertilidad() - 1); pokemon2.setFertilidad(pokemon2.getFertilidad() - 1);
                     String nombreCria = new String();
-                    String padre = pokemon1.nombre.size / 2;
-                    String madre = pokemon2.nombre.size / 2;
+                    String padre = pokemon1.getNombre();
+                    String madre = pokemon2.getNombre();
                     int numero = sc.nextInt(1 - 2);
                     if (numero == 1) {
-                        String nombreCria = pokemon1.nombre.size / 2 + pokemon2.nombre.size / 2;
+                        for(int i = (int) (pokemon1.getMote().length()/2); i < pokemon1.getMote().length(); i++){
+                            nombreCria += pokemon1.getMote().charAt(i);
+                        }
+                        for(int i = (int) (pokemon2.getMote().length()/2); i < pokemon2.getMote().length(); i++){
+                            nombreCria += pokemon2.getMote().charAt(i);
+                        }
                     } else {
-                        String nombreCria = pokemon2.nombre.size / 2 + pokemon1.nombre.size / 2;
+                        for(int i = (int) (pokemon2.getMote().length()/2); i < pokemon2.getMote().length(); i++){
+                            nombreCria += pokemon2.getMote().charAt(i);
+                        }
+                        for(int i = (int) (pokemon1.getMote().length()/2); i < pokemon1.getMote().length(); i++){
+                            nombreCria += pokemon1.getMote().charAt(i);
+                        }
                     }
                     
                     if(pokemon1.getAtaque() > pokemon2.getAtaque()){
@@ -278,20 +286,9 @@ public class Entrenador implements IEntrenable{
                     }
                     
                 
-                } else {
-
-                    System.out.println("Uno de tus Pokémons no puede criar");
+                } 
                 }
-
-            } else {
-                System.out.println("Para criar tus pokemon deben tener diferente sexo");
-            }
-        }
-        else{
-            System.out.println("Tus pokemon no son del mismo tipo");
-        }
-
-    }*/
+            
 
     public void generarPokemonAleatorio(int nivelMedioEquipo) {
         Random rnd = new Random();
@@ -307,10 +304,10 @@ public class Entrenador implements IEntrenable{
         p.setFertilidad(5);
         
         for(int i = 1; i < nivelFinal; i++){
-            p.subirNivel();
+            //p.subirNivel();
         }
         
-        equipo.add(p);
+        equipoEntrenador.add(p);
     }
 
 
