@@ -30,7 +30,7 @@ public class Pokemon implements IMecanicaCaptura{
         this.defensaEspecial = defensaEspecial;
         this.velocidad = velocidad;
         this.estamina = estamina;
-        this.nivel = nivel;
+        this.nivel = 1;
         this.fertilidad = 5;
         this.tipo = tipo;
         this.estado = estado;
@@ -228,7 +228,7 @@ public class Pokemon implements IMecanicaCaptura{
         }
     }
     public void curarPokemon(){
-        vitalidad = 100;
+        vitalidad = 150;
     }
 
     @Override

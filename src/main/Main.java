@@ -1,12 +1,18 @@
 package main;
 
-import pokemon.EnumTipo;
+import java.util.ArrayList;
+import entrenador.Entrenador;
 import pokemon.Pokemon;
 
 public class Main {
     public static void main(String[] args) {
+        Pokemon pokemon = new Pokemon();
 
-        Pokemon pok1 = new Pokemon();
+        Entrenador entrenador = new Entrenador("Paco", new ArrayList<Pokemon>(), new ArrayList<Pokemon>());
+
+        Entrenador entrenador2 = new Entrenador(4);
+
+        
 
     }
 }
