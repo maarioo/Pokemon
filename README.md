@@ -3,6 +3,9 @@
 Mario Rodriguez Casado
 =======
 
+=======
+Mario Rodriguez Casado
+>>>>>>> clase_pokemon_atributos
 
 ## Pokémon class
 
