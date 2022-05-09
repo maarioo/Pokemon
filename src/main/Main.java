@@ -1,11 +1,12 @@
 package main;
 
+import pokemon.EnumTipo;
 import pokemon.Pokemon;
 
 public class Main {
     public static void main(String[] args) {
 
-        Pokemon p = new Pokemon(null, null, 0, 0, 0, 0, 0, 0, 0, 0, null, null);
-        System.out.println(p.getNombre());
+        Pokemon pok1 = new Pokemon();
+
     }
 }

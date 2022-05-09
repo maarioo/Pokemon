@@ -16,6 +16,7 @@ public abstract class Movimiento {
         this.moviDisponibles = moviDisponibles;
     }
     public int getEstamina() {
+        
         return estamina;
     }
     public ArrayList<Pokemon>[] getnMovimientos() {

@@ -37,6 +37,10 @@ public class Pokemon implements IMecanicaCaptura{
         this.xpActual = xpActual;
     }
     
+    public Pokemon(EnumTipo tipo) {
+        this.tipo = tipo;
+    }
+
     public Pokemon() {
     }
 
