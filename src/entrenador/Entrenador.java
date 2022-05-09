@@ -88,8 +88,8 @@ public class Entrenador implements IEntrenable {
             else
                 pokemon.setDefensaEspecial(pokemon.getDefensaEspecial() + 5);
 
-            if (pokemon.getVitalidad() + 5 >= 100)
-                pokemon.setVitalidad(100);
+            if (pokemon.getVitalidad() + 5 >= 200)
+                pokemon.setVitalidad(200);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
                 return true;
@@ -147,8 +147,8 @@ public class Entrenador implements IEntrenable {
             else
                 pokemon.setVelocidad(pokemon.getVelocidad() + 5);
 
-            if (pokemon.getVitalidad() + 5 >= 100)
-                pokemon.setVitalidad(100);
+            if (pokemon.getVitalidad() + 5 >= 200)
+                pokemon.setVitalidad(200);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
                 return true;
@@ -177,8 +177,8 @@ public class Entrenador implements IEntrenable {
             else
                 pokemon.setVelocidad(pokemon.getVelocidad() + 5);
 
-            if (pokemon.getVitalidad() + 5 >= 100)
-                pokemon.setVitalidad(100);
+            if (pokemon.getVitalidad() + 5 >= 200)
+                pokemon.setVitalidad(200);
             else
                 pokemon.setVitalidad(pokemon.getVitalidad() + 5);
                 return true;
