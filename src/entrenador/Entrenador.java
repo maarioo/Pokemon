@@ -1,29 +1,40 @@
 package entrenador;
 
-import pokemon.Pokemon;
+
 import java.util.ArrayList;
 import java.util.Random;
 
+
+import pokemon.Pokemon;
+
+
 public class Entrenador implements IEntrenable {
     private String nombre;
-    private ArrayList<Pokemon> equipo;
-    private ArrayList<Pokemon> cajaPokemon;
+    private ArrayList<Pokemon> equipo = new ArrayList<>();
+    ArrayList<Pokemon> equipoEntrenador = new ArrayList<>();
+    private ArrayList<Pokemon> caja;
     private int pokedollar;
-    private Pokeball objeto;
-    private int numPokemon;
 
-    Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> pokedex,Pokeball objeto, int numPokemon) {
+    public Entrenador(String nombre, ArrayList<Pokemon> equipo, ArrayList<Pokemon> caja) {
         Random rnd = new Random();
         this.nombre = nombre;
-        this.pokedollar = rnd.nextInt(800 - 1000);
+        this.pokedollar = rnd.nextInt(200)+800;
         this.equipo = equipo;
-        this.cajaPokemon = cajaPokemon;
-        this.numPokemon = numPokemon;
-        this.objeto = objeto;
+        this.caja = caja;
         
-
     }
 
+    public Entrenador(int nivelMedioEquipo){
+        Random rnd = new Random();
+        String[] nombres = {"Fernando","Xin Lu","Yasuo","Super","Pepe", "Luis Manuel", "Paco", "Juaniko", "Ash Ketchup", "Fran", "Pedro", "Jose Carlos", "Angel", "Luis", "Markos"};
+        this.nombre = nombres[rnd.nextInt(15)];
+        ArrayList<Pokemon> equipoEntrenador = new ArrayList<>();
+        for(int i = 0; i < 4; i++){
+            //equipoEntrenador.add(pokemon.getPokemonAle());
+        }
+        
+    }
+    
     public ArrayList<Pokemon> getEquipo() {
         return equipo;
     }
@@ -32,25 +43,13 @@ public class Entrenador implements IEntrenable {
         return nombre;
     }
 
-    public int getNumPokemon() {
-        return numPokemon;
-    }
-
 
     public int getPokedollar() {
         return pokedollar;
     }
 
-    public ArrayList<Pokemon> cajaPokemon() {
-        return cajaPokemon;
-    }
-
-    public Pokeball getObjeto() {
-        return objeto;
-    }
-
-    public void setObjeto(Pokeball objeto) {
-        this.objeto = objeto;
+    public ArrayList<Pokemon> caja() {
+        return caja;
     }
 
     public void setEquipo(ArrayList<Pokemon> equipo) {
@@ -61,17 +60,12 @@ public class Entrenador implements IEntrenable {
         this.nombre = nombre;
     }
 
-    public void setNumPokemon(int numPokemon) {
-        this.numPokemon = numPokemon;
-    }
-
-
     public void setPokedollar(int pokedollar) {
         this.pokedollar = pokedollar;
     }
 
-    public void setcajaPokemon(ArrayList<Pokemon> cajaPokemon) {
-        this.cajaPokemon = cajaPokemon;
+    public void setcajaPokemon(ArrayList<Pokemon> caja) {
+        this.caja = caja;
     }
 
     @Override
@@ -80,132 +74,136 @@ public class Entrenador implements IEntrenable {
     }
 
     @Override
-    public void entrenamientoPesado(Pokemon pokemon) {
-        int comprobador = pokedollar - (20 * pokemon.nivel);
+    public boolean entrenamientoPesado(Pokemon pokemon) {
+        int comprobador = pokedollar - (20 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
-            if (pokemon.defensa + 5 >= 100)
-                pokemon.defensa = 100;
+            if (pokemon.getDefensa() + 5 >= 100)
+                pokemon.setDefensa(100);
             else
-                pokemon.defensa += 5;
+                pokemon.setDefensa(pokemon.getDefensa() + 5);
 
-            if (pokemon.defensaEspecial + 5 >= 100)
-                defensaEspecial = 100;
+            if (pokemon.getDefensaEspecial() + 5 >= 100)
+            pokemon.setDefensaEspecial(100);
             else
-                pokemon.defensaEspecial += 5;
+                pokemon.setDefensaEspecial(pokemon.getDefensaEspecial() + 5);
 
-            if (pokemon.vitalidad + 5 >= 100)
-                vitalidad = 100;
+            if (pokemon.getVitalidad() + 5 >= 100)
+                pokemon.setVitalidad(100);
             else
-                pokemon.vitalidad += 5;
+                pokemon.setVitalidad(pokemon.getVitalidad() + 5);
+                return true;
+        } else return false;
+    } 
+    
 
+    
+
+    @Override
+    public boolean entrenamientoFurioso(Pokemon pokemon) {
+        int comprobador = pokedollar - (30 * pokemon.getNivel());
+        if (comprobador >= 0) {
+            pokedollar = pokedollar - comprobador;
+            if (pokemon.getAtaque() + 5 >= 100)
+                pokemon.setAtaque(100);
+            else
+                pokemon.setAtaque(pokemon.getAtaque() + 5);
+
+            if (pokemon.getAtaqueEspecial() + 5 >= 100)
+                pokemon.setAtaqueEspecial(100);
+            else
+                pokemon.setAtaqueEspecial(pokemon.getAtaqueEspecial() + 5);
+
+            if (pokemon.getVelocidad() + 5 >= 100)
+                pokemon.setVelocidad(100);
+            else
+                pokemon.setVelocidad(pokemon.getVelocidad() + 5);
+                return true;
         } else {
-            System.out.println("No tienes suficientes pokedollares");
+            return false;
         }
+    
 
     }
 
     @Override
-    public void entrenamientoFurioso(Pokemon pokemon) {
-        int comprobador = pokedollar - (30 * pokemon.nivel);
-        if (comprobador >= 0) {
-            pokedollar = pokedollar - comprobador;
-            if (pokemon.ataque + 5 >= 100)
-                pokemon.ataque = 100;
-            else
-                pokemon.ataque += 5;
-
-            if (pokemon.ataqueEspecial + 5 >= 100)
-                pokemon.ataqueEspecial = 100;
-            else
-                pokemon.ataqueEspecial += 5;
-
-            if (pokemon.velocidad + 5 >= 100)
-                pokemon.velocidad = 100;
-            else
-                pokemon.velocidad += 5;
-
-        } else {
-            System.out.println("No tienes suficientes pokedollares");
-        }
-
-    }
-
-    @Override
-    public void entrenamientoFuncional(Pokemon pokemon) {
-        int comprobador = pokedollar - (40 * pokemon.nivel);
+    public boolean entrenamientoFuncional(Pokemon pokemon) {
+        int comprobador = pokedollar - (40 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
 
-            if (pokemon.ataque + 5 >= 100)
-                pokemon.ataque = 100;
+            if (pokemon.getAtaque() + 5 >= 100)
+                pokemon.setAtaque(100);
             else
-                pokemon.ataque += 5;
+                pokemon.setAtaque(pokemon.getAtaque() + 5);
 
-            if (pokemon.defensa + 5 >= 100)
-                pokemon.defensa = 100;
+            if (pokemon.getDefensa() + 5 >= 100)
+                pokemon.setDefensa(100);
             else
-                pokemon.defensa += 5;
+                pokemon.setDefensa(pokemon.getDefensa() + 5);
 
-            if (pokemon.velocidad + 5 >= 100)
-                pokemon.velocidad = 100;
+            if (pokemon.getVelocidad() + 5 >= 100)
+                pokemon.setVelocidad(100);
             else
-                pokemon.velocidad += 5;
+                pokemon.setVelocidad(pokemon.getVelocidad() + 5);
 
-            if (pokemon.vitalidad + 5 >= 100)
-                pokemon.vitalidad = 100;
+            if (pokemon.getVitalidad() + 5 >= 100)
+                pokemon.setVitalidad(100);
             else
-                pokemon.vitalidad += 5;
-        }
-        System.out.println("No tienes sufucientes pokedollares");
+                pokemon.setVitalidad(pokemon.getVitalidad() + 5);
+                return true;
+        }else return false;
+    
+        
     }
 
-    @Override
-    public void entrenamientoOnirico(Pokemon pokemon) {
-        int comprobador = pokedollar - (40 * pokemon.nivel);
+    @Override 
+    public boolean entrenamientoOnirico(Pokemon pokemon) {
+        int comprobador = pokedollar - (40 * pokemon.getNivel());
         if (comprobador >= 0) {
             pokedollar = pokedollar - comprobador;
-            if (pokemon.ataqueEspecial + 5 >= 100)
-                pokemon.ataqueEspecial = 100;
+            if (pokemon.getAtaqueEspecial() + 5 >= 100)
+                pokemon.setAtaqueEspecial(100);
             else
-                pokemon.ataqueEspecial += 5;
+                pokemon.setAtaqueEspecial(pokemon.getAtaqueEspecial() + 5);
 
-            if (pokemon.defensaEspecial + 5 >= 100)
-                pokemon.defensaEspecial = 100;
+            if (pokemon.getDefensaEspecial() + 5 >= 100)
+                pokemon.setDefensaEspecial(100);
             else
-                pokemon.defensaEspecial += 5;
+                pokemon.setDefensaEspecial(pokemon.getDefensaEspecial() + 5);
 
-            if (pokemon.velocidad + 5 >= 100)
-                pokemon.velocidad = 100;
+            if (pokemon.getVelocidad() + 5 >= 100)
+                pokemon.setVelocidad(100);
             else
-                pokemon.velocidad += 5;
+                pokemon.setVelocidad(pokemon.getVelocidad() + 5);
 
-            if (pokemon.vitalidad + 5 >= 100)
-                pokemon.vitalidad = 100;
+            if (pokemon.getVitalidad() + 5 >= 100)
+                pokemon.setVitalidad(100);
             else
-                pokemon.vitalidad += 5;
-        } else {
-            System.out.println("No tienes suficientes pokedollares");
+                pokemon.setVitalidad(pokemon.getVitalidad() + 5);
+                return true;
+        } else return false;
         }
-
-    }
-
-    public void guardarPokemon(Pokemon pokemon) {
+    
+    public boolean guardarPokemon(Pokemon pokemon) {
         if (equipo.size() > 1) {
-            cajaPokemon.add(pokemon);
-        } else {
-            System.out.println("Tú equipo debe tener mínimo 1 Pokemons");
-        }
+            caja.add(pokemon);
+            equipo.remove(pokemon);
+            return true;
+        } else 
+            return false;
     }
 
-    public void sacarPokemon(Pokemon pokemon) {
+    public boolean sacarPokemon(Pokemon pokemon) {
         if (equipo.size() < 4) {
             equipo.add(pokemon);
-        } else {
-            System.out.println("Tú equipo no puede tener más de 4 Pokemons");
-        }
+            caja.remove(pokemon);
+            return true;
+        } else 
+            return false;
     }
-
+    
+    //TODO: MOVIMIENTOS POKEMON CRIA
     public void ponerACriar(Pokemon pokemon1, Pokemon pokemon2) {
         Random sc = new Random();
         int ataqueCria;
@@ -216,82 +214,101 @@ public class Entrenador implements IEntrenable {
         int velocidadCria;
         int estaminaCria;
 
-        if(pokemon1.nombre.equals(pokemon2.nombre)){
-            if (pokemon1.sexo != pokemon2.sexo){
-                if (pokemon1.fertilidad > 0 && pokemon2.fertilidad > 0) {
-                    pokemon1.fertilidad--; pokemon2.fertilidad--;
-                    String padre = pokemon1.nombre.size / 2;
-                    String madre = pokemon2.nombre.size / 2;
+                if (pokemon1.getFertilidad() > 0 && pokemon2.getFertilidad() > 0) {
+                    pokemon1.setFertilidad(pokemon1.getFertilidad() - 1); pokemon2.setFertilidad(pokemon2.getFertilidad() - 1);
+                    String nombreCria = new String();
+                    String padre = pokemon1.getNombre();
+                    String madre = pokemon2.getNombre();
                     int numero = sc.nextInt(1 - 2);
                     if (numero == 1) {
-                        String nombreCria = pokemon1.nombre.size / 2 + pokemon2.nombre.size / 2;
+                        for(int i = (int) (pokemon1.getMote().length()/2); i < pokemon1.getMote().length(); i++){
+                            nombreCria += pokemon1.getMote().charAt(i);
+                        }
+                        for(int i = (int) (pokemon2.getMote().length()/2); i < pokemon2.getMote().length(); i++){
+                            nombreCria += pokemon2.getMote().charAt(i);
+                        }
                     } else {
-                        String nombreCria = pokemon2.nombre.size / 2 + pokemon1.nombre.size / 2;
+                        for(int i = (int) (pokemon2.getMote().length()/2); i < pokemon2.getMote().length(); i++){
+                            nombreCria += pokemon2.getMote().charAt(i);
+                        }
+                        for(int i = (int) (pokemon1.getMote().length()/2); i < pokemon1.getMote().length(); i++){
+                            nombreCria += pokemon1.getMote().charAt(i);
+                        }
                     }
                     
-                    if(pokemon1.ataque > pokemon2.ataque){
+                    if(pokemon1.getAtaque() > pokemon2.getAtaque()){
                         
-                        ataqueCria = pokemon1.ataque;
+                        ataqueCria = pokemon1.getAtaque();
                     }else {
-                        ataqueCria = pokemon2.ataque;
+                        ataqueCria = pokemon2.getAtaque();
                     }
                 
-                    if(pokemon1.ataqueEspecial > pokemon2.ataqueEspecial){
+                    if(pokemon1.getAtaqueEspecial() > pokemon2.getAtaqueEspecial()){
                         
-                        ataqueEspecialCria = pokemon1.ataqueEspecial;
+                        ataqueEspecialCria = pokemon1.getAtaqueEspecial();
                     }else {
-                        ataqueEspecialCria = pokemon2.ataqueEspecial;
+                        ataqueEspecialCria = pokemon2.getAtaqueEspecial();
                     }
                     
-                    if(pokemon1.defensa > pokemon2.defensa){
+                    if(pokemon1.getDefensa() > pokemon2.getDefensa()){
                         
-                        defensaCria = pokemon1.defensa;
+                        defensaCria = pokemon1.getDefensa();
                     }else {
-                        defensaCria = pokemon2.defensa;
+                        defensaCria = pokemon2.getDefensa();
                     }
 
-                    if(pokemon1.defensaEspecial > pokemon2.defensaEspecial){
+                    if(pokemon1.getDefensaEspecial() > pokemon2.getDefensaEspecial()){
                         
-                        defensaEspecialCria = pokemon1.defensaEspecial;
+                        defensaEspecialCria = pokemon1.getDefensaEspecial();
                     }else {
-                        defensaEspecialCria = pokemon2.defensaEspecial;
+                        defensaEspecialCria = pokemon2.getDefensaEspecial();
                     }
 
-                    if(pokemon1.vitalidad > pokemon2.vitalidad){
+                    if(pokemon1.getVitalidad() > pokemon2.getVitalidad()){
                         
-                        vitalidadCria = pokemon1.vitalidad;
+                        vitalidadCria = pokemon1.getVitalidad();
                     }else {
-                        vitalidadCria = pokemon2.vitalidad;
+                        vitalidadCria = pokemon2.getVitalidad();
                     }
 
-                    if(pokemon1.velocidad > pokemon2.velocidad{
+                    if(pokemon1.getVelocidad() > pokemon2.getVelocidad()){
                         
-                        velocidadCria = pokemon1.velocidad;
+                        velocidadCria = pokemon1.getVelocidad();
                     }else {
-                        velocidadCria = pokemon2.velocidad;
+                        velocidadCria = pokemon2.getVelocidad();
                     }
 
-                    if(pokemon1.estamina > pokemon2.estamina){
+                    if(pokemon1.getEstamina() > pokemon2.getEstamina()){
                         
-                        estaminaCria = pokemon1.estamina;
+                        estaminaCria = pokemon1.getEstamina();
                     }else {
-                        estaminaCria = pokemon2.estamina;
+                        estaminaCria = pokemon2.getEstamina();
                     }
                     
                 
-                } else {
-
-                    System.out.println("Uno de tus Pokémons no puede criar");
+                } 
                 }
+            
 
-            } else {
-                System.out.println("Para criar tus pokemon deben tener diferente sexo");
-            }
+    public void generarPokemonAleatorio(int nivelMedioEquipo) {
+        Random rnd = new Random();
+        Pokemon p = new Pokemon();
+        int nivelFinal = nivelMedioEquipo + (rnd.nextInt(5) - 2);
+        p.setVitalidad(rnd.nextInt(10) + 1);
+        p.setAtaque(rnd.nextInt(5)+1);
+        p.setAtaqueEspecial(rnd.nextInt(5)+1);
+        p.setDefensa(rnd.nextInt(5)+1);
+        p.setDefensaEspecial(rnd.nextInt(5)+1);
+        p.setVelocidad(rnd.nextInt(5)+1);
+        p.setEstamina(rnd.nextInt(10)+1);
+        p.setFertilidad(5);
+        
+        for(int i = 1; i < nivelFinal; i++){
+            //p.subirNivel();
         }
-        else{
-            System.out.println("Tus pokemon no son del mismo tipo");
-        }
-
+        
+        equipoEntrenador.add(p);
     }
+
 
 }
