@@ -12,8 +12,10 @@ public class Combate {
     private int koEntrenador;
     private int koRival;
 
-    Combate() {
-
+    Combate(Entrenador entrenadorJugador, Entrenador entrenadorRival) {
+        this.entrenadorJugador = entrenadorJugador;
+        this.entrenadorRival = entrenadorRival;
+        this.turno = 1;
     }
 
     public int getTurno() {
@@ -56,13 +58,14 @@ public class Combate {
         this.turno = turno;
     }
 
+    //TODO: COMPROBAR LAS VIDAS
     public void combate() {
         ArrayList<Pokemon> pokemonJugador = this.entrenadorJugador.getEquipo();
         ArrayList<Pokemon> pokemonRival = this.entrenadorRival.getEquipo();
         
-       if (pokemonJugador.size() >= 4) {
+       if (pokemonJugador.size() == 4) {
             if (pokemonJugador.get(0).getVelocidad() >= pokemonRival.get(0).getVelocidad()) {
-                while(koEntrenador < 4 && koRival < 4){
+                while(koEntrenador < 4 || koRival < 4){
                     turno++;
                 }
             }
@@ -70,8 +73,13 @@ public class Combate {
 
     }
 
-    public void rendirse() {
-        koRival = 4;
+    public boolean rendirse() {
+        if(true){
+        koEntrenador = 4;
+        perderPokedollares();
+        return true;
+        }else return false;
+
     }
 
     public boolean ganarPokedollares(){
