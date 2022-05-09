@@ -118,7 +118,7 @@ public class Pokemon implements IMecanicaCaptura{
     public void setEstado(EnumEstado estado) {
         this.estado = estado;
     }
-    public int subirNivel(){
+    public void subirNivel(){
         Random r = new Random();
             if(xpActual > 10 * nivel) {
                 this.nivel++;
@@ -129,7 +129,102 @@ public class Pokemon implements IMecanicaCaptura{
                 defensaEspecial = defensaEspecial + r.nextInt(5) + 1;
                 velocidad = velocidad + r.nextInt(5) + 1;
             }
-        return nivel;
+    }
+    public void comprobarVentajas(Pokemon pokemonRival){
+        if (this.getTipo() == EnumTipo.AGUA && pokemonRival.getTipo() == EnumTipo.FUEGO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.AGUA && pokemonRival.getTipo() == EnumTipo.TIERRA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.FUEGO && pokemonRival.getTipo() == EnumTipo.PLANTA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.FUEGO && pokemonRival.getTipo() == EnumTipo.BICHO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.PLANTA && pokemonRival.getTipo() == EnumTipo.AGUA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.PLANTA && pokemonRival.getTipo() == EnumTipo.TIERRA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.BICHO && pokemonRival.getTipo() == EnumTipo.PLANTA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.VOLADOR && pokemonRival.getTipo() == EnumTipo.PLANTA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.VOLADOR && pokemonRival.getTipo() == EnumTipo.BICHO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.ELECTRICO && pokemonRival.getTipo() == EnumTipo.AGUA) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.TIERRA && pokemonRival.getTipo() == EnumTipo.ELECTRICO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.TIERRA && pokemonRival.getTipo() == EnumTipo.FUEGO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.TIERRA && pokemonRival.getTipo() == EnumTipo.FUEGO) {
+            System.out.println("El pokemon aliado tiene ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.AGUA && pokemonRival.getTipo() == EnumTipo.VOLADOR
+                || pokemonRival.getTipo() == EnumTipo.BICHO) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.FUEGO && pokemonRival.getTipo() == EnumTipo.ELECTRICO
+                || pokemonRival.getTipo() == EnumTipo.TIERRA || pokemonRival.getTipo() == EnumTipo.VOLADOR) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.PLANTA && pokemonRival.getTipo() == EnumTipo.ELECTRICO) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.BICHO && pokemonRival.getTipo() == EnumTipo.AGUA
+                || pokemonRival.getTipo() == EnumTipo.BICHO || pokemonRival.getTipo() == EnumTipo.ELECTRICO
+                || pokemonRival.getTipo() == EnumTipo.TIERRA) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.ELECTRICO && pokemonRival.getTipo() == EnumTipo.BICHO
+                || pokemonRival.getTipo() == EnumTipo.ELECTRICO || pokemonRival.getTipo() == EnumTipo.FUEGO) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.VOLADOR && pokemonRival.getTipo() == EnumTipo.AGUA
+                || pokemonRival.getTipo() == EnumTipo.FUEGO || pokemonRival.getTipo() == EnumTipo.TIERRA
+                || pokemonRival.getTipo() == EnumTipo.VOLADOR) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else if (this.getTipo() == EnumTipo.TIERRA && pokemonRival.getTipo() == EnumTipo.AGUA
+                || pokemonRival.getTipo() == EnumTipo.TIERRA) {
+            System.out.println("Estais empatados en ventaja");
+        }
+
+        else {
+            System.out.println("Tu rival tiene ventaja.");
+        }
+    }
+    public void curarPokemon(){
+        vitalidad = 100;
     }
 
     @Override
