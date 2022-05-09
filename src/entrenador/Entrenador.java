@@ -310,9 +310,14 @@ public class Entrenador implements IEntrenable {
         equipoEntrenador.add(p);
     }
 
+<<<<<<< HEAD
     public void curarTeam(){
         for(int i = 0; i < equipo.size(); i++){
             //curarPokemon;
         }
     }
 }
+=======
+
+}
+>>>>>>> f66dc832dc36106124f912646aa819d8c0929816
